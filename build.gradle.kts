@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "4.1.0"
 	id("io.spring.dependency-management") version "1.1.7"
+	jacoco
 }
 
 group = "pl.witekcybulski"
@@ -33,4 +34,15 @@ tasks.withType<Test> {
 		"-XX:+EnableDynamicAgentLoading",
 		"-Xshare:off"
 	)
+
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+	}
 }
