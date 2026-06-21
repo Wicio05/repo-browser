@@ -29,4 +29,13 @@ class GithubClient
 			.retrieve()
 			.body(new ParameterizedTypeReference<>() {});
 	}
+
+	List<GithubBranchDto> fetchBranches(String username, String repoName)
+	{
+		return restClient
+			.get()
+			.uri("/repos/{username}/{repoName}/branches", username, repoName)
+			.retrieve()
+			.body(new ParameterizedTypeReference<>() {});
+	}
 }
